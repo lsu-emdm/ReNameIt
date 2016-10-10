@@ -1,0 +1,21 @@
+Get LibRosa installed (python)
+
+https://github.com/librosa/librosa
+
+https://nodejs.org/api/child_process.html#child_process_child_process
+
+- Take notes on what is needed
+- node exec() to run shell script? (would have to parse file output, wait on completion)
+- node python bindings?
+
+Interesting possible findings:
+- phrase extraction
+- repeats
+
+Possible reactions to entropy (changes over time)
+- PROBABLY simpler over time
+- pitch / rhythm entropy
+- note to note
+- 2nd order (do these 2 notes predict the next note)
+- 3rd order
+- Shanon-Weaver equation
