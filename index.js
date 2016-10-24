@@ -8,6 +8,8 @@ var uploads = multer({ dest: 'uploads/' })
 
 // Express middleware (provided for static service)
 app.use(express.static('static'))
+// Also serve the node_modules folder
+app.use(express.static('node_modules'))
 
 app.post('/uploads', uploads.any(), (req, res, next) => {
   // Prepare file structure
@@ -26,6 +28,17 @@ app.post('/uploads', uploads.any(), (req, res, next) => {
     console.log(`child process exited with code ${code}`)
   })
 })
+
+// TODO: scan directory for all submitted jobs and send a JSON array back
+app.get('/jobs', (req, res) => {
+  // send back array containing the list of jobs submitted
+  console.log('got request')
+  //sending dummy
+  res.send([{name: "jerry"}, {name: "johnny"}])
+  //res.send(fs.readdirSync('uploads'))
+})
+
+// TODO: send job information per job
 
 app.listen(8080, () => {
   console.log("Webserver started at port 8080")

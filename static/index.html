@@ -1,7 +1,22 @@
 <html>
-<form action="/uploads" enctype="multipart/form-data" method="post">
-  <input type="file" name="file"></input>
-  <input type="text" name="text"></input>
-  <button type="submit">Send!</button>
-</form>
+  <head>
+    <script src="/angular/angular.min.js"></script>
+    <script src="/angular-resource/angular-resource.min.js"></script>
+    <script src="index.js"></script>
+    <script src="jobsService.js"></script>
+    <script src="jobsController.js"></script>
+  </head>
+  <body ng-app="renotate">
+    <form action="/uploads" enctype="multipart/form-data" method="post">
+      <input type="file" name="file"></input>
+      <button type="submit">Send!</button>
+    </form>
+    <div ng-controller="JobsController">
+      <table>
+        <tr ng-repeat="job in jobs">
+          <td>{{job.name}}</td>
+        </tr>
+      </table>
+    </div>
+  </body>
 </html>

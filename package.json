@@ -9,7 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "angular": "^1.5.8",
+    "angular-resource": "^1.5.8",
     "express": "^4.14.0",
-    "multer": "^1.2.0"
+    "multer": "^1.2.0",
+    "tone": "^0.8.0"
   }
 }
