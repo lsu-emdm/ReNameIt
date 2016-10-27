@@ -11,6 +11,9 @@ app.use(express.static('static'))
 // Also serve the node_modules folder
 app.use(express.static('node_modules'))
 
+//please remove
+app.use(express.static('uploads'))
+
 app.post('/uploads', uploads.any(), (req, res, next) => {
   // Prepare file structure
   const dirname = 'uploads/'+req.files[0].originalname+'/'
@@ -32,10 +35,7 @@ app.post('/uploads', uploads.any(), (req, res, next) => {
 // TODO: scan directory for all submitted jobs and send a JSON array back
 app.get('/jobs', (req, res) => {
   // send back array containing the list of jobs submitted
-  console.log('got request')
-  //sending dummy
-  res.send([{name: "jerry"}, {name: "johnny"}])
-  //res.send(fs.readdirSync('uploads'))
+  res.send(fs.readdirSync('uploads'))
 })
 
 // TODO: send job information per job

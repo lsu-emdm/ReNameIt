@@ -16,6 +16,7 @@ Dependencies
 3. ``python`` > 3.4 and the Python package manager of your choice
    (``pip`` or ``conda``). Needed to run librosa
 4. Librosa
+5. An installation of MongoDB
 
 Folder Structure
 ----------------

@@ -1,3 +1,9 @@
+TODO immediately:
+  mongoDB installed
+  hook up audio toolchain to database
+  sonic annotator (melodia plugin) installed
+  add ^ to toolchain
+
 Get LibRosa installed (python)
 
 https://github.com/librosa/librosa

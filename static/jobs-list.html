@@ -1,0 +1,6 @@
+<table ng-controller="JobsController">
+  <tr ng-repeat="job in jobs">
+    <td>{{job}}</td>
+    <td>Original: <button ng-click='play(job)'>Play</button></td>
+  </tr>
+</table>

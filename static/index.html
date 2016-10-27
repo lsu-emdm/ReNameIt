@@ -1,5 +1,6 @@
 <html>
   <head>
+    <script src="https://tonejs.github.io/CDN/latest/Tone.min.js"></script>
     <script src="/angular/angular.min.js"></script>
     <script src="/angular-resource/angular-resource.min.js"></script>
     <script src="index.js"></script>
@@ -11,12 +12,7 @@
       <input type="file" name="file"></input>
       <button type="submit">Send!</button>
     </form>
-    <div ng-controller="JobsController">
-      <table>
-        <tr ng-repeat="job in jobs">
-          <td>{{job.name}}</td>
-        </tr>
-      </table>
-    </div>
+    <!-- custom HTML tag defined by an Angular directive. See index.js -->
+    <jobs-list></jobs-list>
   </body>
 </html>
