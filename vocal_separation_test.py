@@ -33,7 +33,7 @@ import sys
 
 #############################################
 # Load an example with vocals.
-y, sr = librosa.load(sys.argv[2])
+y, sr = librosa.load(sys.argv[1])
 
 
 # And compute the spectrogram magnitude and phase
@@ -134,5 +134,5 @@ y_foreground = librosa.istft(S_background * phase)
 y_background = librosa.istft(S_foreground * phase)
 
 
-librosa.output.write_wav(sys.argv[1]+'foreground.wav', y_foreground, sr)
-librosa.output.write_wav(sys.argv[1]+'background.wav', y_background, sr)
+librosa.output.write_wav('foregrounds/'+sys.argv[1], y_foreground, sr)
+librosa.output.write_wav('backgrounds/'+sys.argv[1], y_background, sr)

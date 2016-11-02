@@ -7,7 +7,7 @@ Installation and Running
 
 1. See the next section to ensure dependencies are installed
 2. ``npm install``
-3. ``node index.js`` to start the webserver (on port 8080)
+3. ``npm start`` to start the webserver (on port 8080)
 
 Dependencies
 ------------

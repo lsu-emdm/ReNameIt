@@ -1,8 +1,10 @@
-TODO immediately:
-  mongoDB installed
-  hook up audio toolchain to database
+Frontend TODO:
+  landing page: submit jobs (big button on screen)
+
+TODO:
   sonic annotator (melodia plugin) installed
   add ^ to toolchain
+  add a way to fire batch-processes
 
 Get LibRosa installed (python)
 
