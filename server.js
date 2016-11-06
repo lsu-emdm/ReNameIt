@@ -3,7 +3,7 @@ const multer = require('multer')
 const childProcess = require('child_process')
 const fs = require('fs')
 const mongo = require('mongodb').MongoClient
-const dburl = 'mongodb://localhost:27017/renotate'
+const url = 'mongodb://localhost:27017/renotate'
 
 var app = express()
 var uploads = multer({ dest: 'uploads/' })
@@ -19,7 +19,7 @@ app.use(express.static('uploads'))
 // Route all hits at /jobs/:jobid to serve the job template
 // TODO: organize HTTP requests for data and for html files to use different endpoints
 app.get("/jobs/:jobid", (req, res) => {
-  res.sendFile("static/job.html", {root: __dirname})
+  res.sendFile("static/job_wrapper.html", {root: __dirname})
 })
 
 app.post('/uploads', uploads.any(), (req, res, next) => {
@@ -36,7 +36,7 @@ app.post('/uploads', uploads.any(), (req, res, next) => {
   })
   py.on('close', (code) => {
     console.log(`child process exited with code ${code}`)
-    MongoClient.connect(url, (err, db) => {
+    mongo.connect(url, (err, db) => {
       if(err) {
         console.log("error connecting to mongo")
         db.close()
@@ -76,7 +76,7 @@ app.post('/uploads', uploads.any(), (req, res, next) => {
 // TODO: scan directory for all submitted jobs and send a JSON array back
 app.get('/alljobs', (req, res) => {
   // send back array containing the list of jobs submitted
-  MongoClient.connect(url, (err, db) => {
+  mongo.connect(url, (err, db) => {
     db.collection('jobs').find().toArray((err, docs) => {
       res.send(docs)
       db.close()
@@ -85,10 +85,9 @@ app.get('/alljobs', (req, res) => {
 })
 
 app.get('/jobd/:jobid', (req,res) => {
-  MongoClient.connect(url, (err, db) => {
-    db.collection('jobs').findOne({multer_id: req.params.jobid}).next((err, doc) => {
-      return doc
-    })
+  mongo.connect(url, (err, db) => {
+    res.send(db.collection('jobs').findOne({multer_id: req.params.jobid}))
+    db.close()
   })
 })
 

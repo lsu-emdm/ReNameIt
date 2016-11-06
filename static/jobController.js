@@ -1,4 +1,4 @@
-angular.module("renotate").controller("JobController", ["$scope", "$location", "Jobs", ($scope, $location, Jobs) => {
-  $scope.jobno = $location.path().split()[$location.path().split().length - 1]
-  $scope.jobdata = Job.get({jobno: jobno})
+angular.module('renotate').controller("JobController", ["$scope", "$location", "Job", ($scope, $location, Job) => {
+  $scope.jobid = window.location.pathname.split('/')[window.location.pathname.split('/').length - 1]
+  $scope.jobdata = Job.get({jobid: $scope.jobid})
 }])
