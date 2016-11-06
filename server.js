@@ -16,6 +16,12 @@ app.use(express.static('node_modules'))
 // Provide access to uploaded files
 app.use(express.static('uploads'))
 
+// Route all hits at /jobs/:jobid to serve the job template
+// TODO: organize HTTP requests for data and for html files to use different endpoints
+app.get("/jobs/:jobid", (req, res) => {
+  res.sendFile("static/job.html", {root: __dirname})
+})
+
 app.post('/uploads', uploads.any(), (req, res, next) => {
   // Prepare file structure
   // TODO: name files <human identifier>_randomstring
@@ -68,12 +74,20 @@ app.post('/uploads', uploads.any(), (req, res, next) => {
 })
 
 // TODO: scan directory for all submitted jobs and send a JSON array back
-app.get('/jobs', (req, res) => {
+app.get('/alljobs', (req, res) => {
   // send back array containing the list of jobs submitted
   MongoClient.connect(url, (err, db) => {
     db.collection('jobs').find().toArray((err, docs) => {
       res.send(docs)
       db.close()
+    })
+  })
+})
+
+app.get('/jobd/:jobid', (req,res) => {
+  MongoClient.connect(url, (err, db) => {
+    db.collection('jobs').findOne({multer_id: req.params.jobid}).next((err, doc) => {
+      return doc
     })
   })
 })
