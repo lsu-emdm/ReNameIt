@@ -33,7 +33,7 @@ import sys
 
 #############################################
 # Load an example with vocals.
-y, sr = librosa.load(sys.argv[1])
+y, sr = librosa.load("uploads/"+sys.argv[1])
 
 
 # And compute the spectrogram magnitude and phase

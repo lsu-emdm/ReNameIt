@@ -1,6 +1,6 @@
 <table ng-controller="JobsController">
   <tr ng-repeat="job in jobs">
-    <td>{{job}}</td>
-    <td>Original: <button ng-click='play(job)'>Play</button></td>
+    <td>{{job.name}}</td>
+    <td><a href="jobs/{{job._id}}">Link</a></td>
   </tr>
 </table>
