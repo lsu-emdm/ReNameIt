@@ -1,3 +1,5 @@
+TODO: Batch jobs
+
 Frontend TODO:
   landing page: submit jobs (big button on screen)
 

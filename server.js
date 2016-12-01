@@ -9,6 +9,10 @@ const ObjectId = require('mongodb').ObjectId
 var app = express()
 var uploads = multer({ dest: 'uploads/' })
 
+// TODO: Socket to submit job and send back message
+// TODO: PlayerUI with waveform
+// TODO: Sonic annotator
+
 // Express middleware (provided for static service)
 app.use(express.static('static'))
 // Also serve the node_modules folder
@@ -16,6 +20,7 @@ app.use(express.static('node_modules'))
 
 // Provide access to uploaded files
 app.use("/uploads", express.static('uploads'))
+//TODO: BAD
 app.use("/foregrounds", express.static('foregrounds'))
 app.use("/backgrounds", express.static('backgrounds'))
 
@@ -54,6 +59,7 @@ app.post('/uploads', uploads.any(), (req, res, next) => {
     console.log(`stdout: ${data}`)
   })
   py.stderr.on('data', (data) => {
+    // TODO: store error state
     console.log(`stderr: ${data}`)
   })
   py.on('close', (code) => {
