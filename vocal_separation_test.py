@@ -134,5 +134,6 @@ y_foreground = librosa.istft(S_background * phase)
 y_background = librosa.istft(S_foreground * phase)
 
 
-librosa.output.write_wav('foregrounds/'+sys.argv[1], y_foreground, sr)
-librosa.output.write_wav('backgrounds/'+sys.argv[1], y_background, sr)
+# it seems that the backgrounds and foregrounds are swapped, so we're fixing it here
+librosa.output.write_wav('backgrounds/'+sys.argv[1], y_foreground, sr)
+librosa.output.write_wav('foregrounds/'+sys.argv[1], y_background, sr)

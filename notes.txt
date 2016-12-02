@@ -1,4 +1,19 @@
+GIVE JESSE FINALS
+
+TODO: Sonic annotator now
+
+TODO: R for big data
+
 TODO: Batch jobs
+
+TODO: human ranking results?
+
+TODO: annotate wave files
+
+Use case: jazz researcher
+  - "I'm gonig to search for all performances of x"
+  - "I want to find things that have a progression II-V-VI"
+  - "I really dig x lick"
 
 Frontend TODO:
   landing page: submit jobs (big button on screen)
