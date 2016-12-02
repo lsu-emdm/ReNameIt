@@ -4,6 +4,9 @@
   <h4>Source separation complete? {{jobdata.sourcesep}}</h4>
   <h4 ng-if="jobdata.sourcesep">Completion code: {{jobdata.sourcesep_exit}} (0 is success)</h4>
   <button ng-click="play()">Play original</button>
+  <canvas nx="waveform" id="originalWaveform"></canvas>
   <button ng-click="playForeground()">Play Foreground</button>
+  <canvas nx="waveform" id="foregroundWaveform"></canvas>
   <button ng-click="playBackground()">Play Background</button>
+  <canvas nx="waveform" id="backgroundWaveform"></canvas>
 </div>
