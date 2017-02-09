@@ -56,14 +56,14 @@ app.post('/uploads', uploads.any(), function(req, res, next) {
   fs.renameSync(req.files[0].path, path)
   const py = childProcess.spawn('python', ['vocal_separation_test.py', req.files[0].originalname+'_'+req.files[0].filename])
   py.stdout.on('data', function(data) {
-    console.log(`stdout: ${data}`)
+    console.log("stdout: "+data)
   })
   py.stderr.on('data', function(data) {
     // TODO: store error state
-    console.log(`stderr: ${data}`)
+    console.log("stderr: "+data)
   })
   py.on('close', function(code) {
-    console.log(`child process exited with code ${code}`)
+    console.log("child process exited with code "+code)
     mongo.connect(url, function(err, db) {
       if(err) {
         console.log("error connecting to mongo")
