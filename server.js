@@ -26,17 +26,17 @@ app.use("/backgrounds", express.static('backgrounds'))
 
 // Route all hits at /jobs/:jobid to serve the job template
 // TODO: organize HTTP requests for data and for html files to use different endpoints
-app.get("/jobs/:jobid", (req, res) => {
+app.get("/jobs/:jobid", function(req, res) {
   res.sendFile("static/job_wrapper.html", {root: __dirname})
 })
 
-app.post('/uploads', uploads.any(), (req, res, next) => {
+app.post('/uploads', uploads.any(), function(req, res, next) {
   // Prepare file structure
   // TODO: name files <human identifier>_randomstring
   const path = "uploads/"+req.files[0].originalname+'_'+req.files[0].filename
   // Log this job in the database
   // TODO: duplicate detection
-  mongo.connect(url, (err, db) => {
+  mongo.connect(url, function(err, db) {
     if(err) {
       console.log("error connecting to mongo")
       db.close()
@@ -48,23 +48,23 @@ app.post('/uploads', uploads.any(), (req, res, next) => {
       // if the filename is different from the job's name
       file: path,
       sourcesep: false
-    }, (err, r) => {
+    }, function(err, r) {
       db.close()
       res.send("Job saved with id: "+r.insertedId+" <a href=\"jobs/"+r.insertedId+"\">Link</a>")
     })
   })
   fs.renameSync(req.files[0].path, path)
   const py = childProcess.spawn('python', ['vocal_separation_test.py', req.files[0].originalname+'_'+req.files[0].filename])
-  py.stdout.on('data', (data) => {
+  py.stdout.on('data', function(data) {
     console.log(`stdout: ${data}`)
   })
-  py.stderr.on('data', (data) => {
+  py.stderr.on('data', function(data) {
     // TODO: store error state
     console.log(`stderr: ${data}`)
   })
-  py.on('close', (code) => {
+  py.on('close', function(code) {
     console.log(`child process exited with code ${code}`)
-    mongo.connect(url, (err, db) => {
+    mongo.connect(url, function(err, db) {
       if(err) {
         console.log("error connecting to mongo")
         db.close()
@@ -74,7 +74,7 @@ app.post('/uploads', uploads.any(), (req, res, next) => {
         multer_id: req.files[0].filename
       }, {
         $set: {sourcesep: true, sourcesep_exit: code}
-      }, null, (err, r) => {
+      }, null, function(err, r) {
         db.close()
       })
     })
@@ -82,19 +82,19 @@ app.post('/uploads', uploads.any(), (req, res, next) => {
 })
 
 // TODO: scan directory for all submitted jobs and send a JSON array back
-app.get('/alljobs', (req, res) => {
+app.get('/alljobs', function(req, res) {
   // send back array containing the list of jobs submitted
-  mongo.connect(url, (err, db) => {
-    db.collection('jobs').find().toArray((err, docs) => {
+  mongo.connect(url, function(err, db) {
+    db.collection('jobs').find().toArray(function(err, docs) {
       res.send(docs)
       db.close()
     })
   })
 })
 
-app.get('/jobd/:jobid', (req,res) => {
-  mongo.connect(url, (err, db) => {
-    db.collection('jobs').findOne({_id: ObjectId(req.params.jobid)}, {}, (error, result) => {
+app.get('/jobd/:jobid', function(req,res) {
+  mongo.connect(url, function(err, db) {
+    db.collection('jobs').findOne({_id: ObjectId(req.params.jobid)}, {}, function(error, result) {
       res.send(result)
     })
     db.close()
@@ -103,6 +103,6 @@ app.get('/jobd/:jobid', (req,res) => {
 
 // TODO: send job information per job
 
-app.listen(8080, () => {
+app.listen(8080, function() {
   console.log("Webserver started at port 8080")
 })
