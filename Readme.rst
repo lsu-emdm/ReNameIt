@@ -5,7 +5,7 @@ Webserver (and other utilities) for the automated, crowd-sourced encoding of mus
 Installation and Running
 ------------------------
 
-1. See the next section to ensure dependencies are installed
+1. See the next section to ensure dependencies are installed. You may have to install the python dependencies from your distribution's package manager instead of from a python package manager like ``pip``.
 2. ``npm install``
 3. ``npm start`` to start the webserver (on port 8080)
 
